@@ -1,3 +1,4 @@
+import {floorPlanMarkup} from './apartment-layout.js';
 const $=id=>document.getElementById(id);
 const viewer=$('building');
 let floor=3,months=24,chosen=null,dialogApartment=null,loaded=false,night=false;
@@ -6,9 +7,9 @@ const homes=Array.from({length:5},(_,i)=>types.map((t,j)=>({...t,floor:i+1,id:`A
 chosen=homes.find(h=>h.id==='A-302');
 const money=n=>new Intl.NumberFormat('mn-MN',{maximumFractionDigits:0}).format(Math.round(n))+' ₮';
 const millions=n=>(n/1e6).toFixed(2).replace(/0+$/,'').replace(/\.$/,'');
-function plan(h,large=false){const bedrooms=h.rooms===3?'<path d="M127 30V118M127 75H207" stroke="#46594b" stroke-width="4"/><rect x="140" y="40" width="36" height="25" rx="2" fill="#c2c9b6"/><rect x="140" y="87" width="36" height="24" rx="2" fill="#c2c9b6"/>':h.rooms===2?'<path d="M127 30V118" stroke="#46594b" stroke-width="4"/><rect x="147" y="52" width="41" height="45" rx="2" fill="#c2c9b6"/><path d="M149 62H186" stroke="#f7f6ee" stroke-width="3"/>':'';return `<svg viewBox="0 0 240 180" role="img" aria-label="${h.rooms} өрөөний жишээ план"><rect x="27" y="26" width="184" height="128" fill="#f9f8f1" stroke="#46594b" stroke-width="5"/><rect x="36" y="36" width="82" height="76" fill="#e8e7d8"/>${bedrooms}<path d="M27 118H211M93 118V154" fill="none" stroke="#46594b" stroke-width="4"/><rect x="41" y="55" width="20" height="42" rx="3" fill="#b7bea8"/><rect x="65" y="60" width="34" height="28" rx="3" fill="#d3c7b2"/><rect x="40" y="130" width="35" height="12" rx="2" fill="#d6dcd1"/><rect x="146" y="128" width="50" height="15" fill="#ded7c7"/><path d="M52 25H98M144 25H184M211 50V94" stroke="#b49970" stroke-width="5"/><path d="M105 154H129" stroke="#f9f8f1" stroke-width="6"/><path d="M105 153V131Q125 131 129 153" stroke="#a8b19d" fill="none"/><text x="77" y="104" text-anchor="middle" fill="#8a9382" font-family="sans-serif" font-size="${large?9:8}">ЗОЧНЫ ӨРӨӨ</text><text x="149" y="169" text-anchor="middle" fill="#8a9382" font-family="sans-serif" font-size="8">ЖИШЭЭ ПЛАН · ${h.area} м²</text></svg>`;}
+function plan(h,large=false){return floorPlanMarkup(h,large);}
 function renderFloors(){$('floorButtons').innerHTML=[5,4,3,2,1].map(n=>`<button class="floor-btn ${n===floor?'selected':''}" data-floor="${n}" aria-pressed="${n===floor}"><strong>${n}-р давхар</strong><span>${homes.filter(h=>h.floor===n&&!h.reserved).length} байр сул</span></button>`).join('');$('selectedFloor').textContent=floor;$('floorSpot').innerHTML=`${floor}-р давхар <span>→</span>`;$('floorSpot').dataset.position=`16m ${1.7+(floor-1)*3.1}m 2m`;viewer.updateHotspot?.({name:'hotspot-floor',position:$('floorSpot').dataset.position});}
-function renderHomes(){const filtered=homes.filter(h=>h.floor===floor&&($('roomFilter').value==='all'||h.rooms===Number($('roomFilter').value)));$('apartmentGrid').innerHTML=filtered.length?filtered.map(h=>`<article class="apartment-card ${h.id===chosen.id?'chosen':''}"><div class="plan-preview"><span class="status ${h.reserved?'reserved':''}">${h.reserved?'Захиалсан':'Боломжтой'}</span>${plan(h)}</div><div class="card-info"><div class="card-top"><h3>${h.id}</h3><span>${h.rooms} өрөө</span></div><p class="card-spec">${h.area} м² &nbsp; · &nbsp; ${h.side} зүг</p><div class="card-price">${millions(h.price)} <small>сая ₮</small></div><button class="card-button" data-home="${h.id}" ${h.reserved?'disabled':''}>${h.reserved?'Захиалсан':'План, дэлгэрэнгүй'} <span>↗</span></button></div></article>`).join(''):'<p class="empty">Энэ давхарт сонгосон өрөөний тоотой байр алга. Өөр давхар сонгоорой.</p>';}
+function renderHomes(){const filtered=homes.filter(h=>h.floor===floor&&($('roomFilter').value==='all'||h.rooms===Number($('roomFilter').value)));$('apartmentGrid').innerHTML=filtered.length?filtered.map(h=>`<article class="apartment-card ${h.id===chosen.id?'chosen':''}"><div class="plan-preview"><span class="status ${h.reserved?'reserved':''}">${h.reserved?'Захиалсан':'Боломжтой'}</span>${plan(h)}</div><div class="card-info"><div class="card-top"><h3>${h.id}</h3><span>${h.rooms} өрөө</span></div><p class="card-spec">${h.area} м² &nbsp; · &nbsp; ${h.side} зүг</p><div class="card-price">${millions(h.price)} <small>сая ₮</small></div><button class="card-button" data-home="${h.id}" ${h.reserved?'disabled':''}>${h.reserved?'Захиалсан':'План ба дэлгэрэнгүй'} <span>↗</span></button><button class="tour-quick" data-tour="${h.id}">Дотор алхаж үзэх →</button></div></article>`).join(''):'<p class="empty">Энэ давхарт сонгосон өрөөний тоотой байр алга. Өөр давхар сонгоорой.</p>';}
 function calculate(){const pct=Number($('downpayment').value),down=chosen.price*pct/100,monthly=(chosen.price-down)/months;$('calcApartment').textContent=`${chosen.id} · ${chosen.rooms} өрөө · ${chosen.area} м²`;$('totalPrice').textContent=money(chosen.price);$('downPercent').textContent=pct+'%';$('downAmount').textContent=money(down);$('monthlyAmount').textContent=money(monthly);$('saveStatus').textContent='';return {pct,down,monthly};}
 $('floorButtons').addEventListener('click',e=>{const b=e.target.closest('[data-floor]');if(!b)return;floor=Number(b.dataset.floor);renderFloors();renderHomes();});
 $('roomFilter').addEventListener('change',renderHomes);
@@ -29,3 +30,18 @@ $('themeToggle').addEventListener('click',()=>{if(!loaded)startModel();night=!ni
 $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else if(viewer.parentElement.requestFullscreen)await viewer.parentElement.requestFullscreen();else{viewer.scrollIntoView({behavior:'smooth'});}}catch{$('sceneLabel').textContent='Бүтэн дэлгэц дэмжигдэхгүй';}});
 renderFloors();renderHomes();calculate();
 $('modelSize').textContent='5.9 MB';
+let tourModule;
+async function openInterior(home,startRoom){
+  const button=$('openTour');button.disabled=true;button.textContent='3D орчин бэлдэж байна…';
+  try{tourModule=await import('./tour.js');$('planDialog').close();viewer.autoRotate=false;tourModule.openTour(home,startRoom);}
+  catch(error){button.textContent='Ачаалсангүй · дахин оролдох';console.error(error);}
+  finally{button.disabled=false;if(tourModule)button.innerHTML='Байран дотор алхаж үзэх <span>→</span>';}
+}
+$('openTour').addEventListener('click',()=>{if(dialogApartment)openInterior(dialogApartment);});
+$('apartmentGrid').addEventListener('click',e=>{const b=e.target.closest('[data-tour]');if(b)openInterior(homes.find(h=>h.id===b.dataset.tour));});
+$('heroTour').addEventListener('click',()=>openInterior(chosen));
+function enterPlanRoom(e){const room=e.target.closest('[data-entryroom]');if(room&&dialogApartment)openInterior(dialogApartment,Number(room.dataset.entryroom));}
+$('dialogPlan').addEventListener('click',enterPlanRoom);
+$('dialogPlan').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();enterPlanRoom(e);}});
+const linkedHome=homes.find(h=>h.id===new URL(location.href).searchParams.get('tour'));
+if(linkedHome)openInterior(linkedHome);

@@ -7,12 +7,13 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Crect width='50' height='50' rx='12' fill='%23203b36'/%3E%3Cpath d='M12 38V19L25 11L38 19V38M20 38V25H30V38' fill='none' stroke='%23e4c49a' stroke-width='3'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="assets/model-viewer.min.js"></script>
-  <script src="app.js" defer></script>
+  <script type="module" src="app.js"></script>
+  <link rel="stylesheet" href="tour.css">
 </head>
 <body>
   <header class="header"><a class="brand" href="#" aria-label="ОРОН нүүр"><span class="brand-icon">⌂</span><span>ОРОН<small>R E S I D E N C E</small></span></a><nav aria-label="Үндсэн цэс"><a class="active" href="#explore">3D танилцуулга</a><a href="#apartments">Байр сонгох</a><a href="#payment">Төлбөрийн нөхцөл</a></nav><a class="header-cta" href="#apartments">Байраа олох <span>↗</span></a></header>
   <main>
-  <section class="intro"><div><p class="eyebrow"><span></span> ОРОН RESIDENCE · КОНЦЕПЦ ТӨСӨЛ</p><h1>Өөрийн <em>орон зайгаа</em> ол.</h1><p class="intro-copy">Гаднаас нь хар. Давхраа сонго. Ирээдүйн гэрээ төсөөл.</p></div><div class="intro-note"><span class="note-line"></span><p>Таван давхар.<br>Таны амьдралын шинэ хуудас.</p></div></section>
+  <section class="intro"><div><p class="eyebrow"><span></span> ОРОН RESIDENCE · КОНЦЕПЦ ТӨСӨЛ</p><h1>Өөрийн <em>орон зайгаа</em> ол.</h1><p class="intro-copy">Байраа сонго. Хаалгаар нь ор. Өөрийн хэмнэлээр алхаж үз.</p><button id="heroTour" class="interior-cta">Байран дотор алхаж үзэх <span>→</span></button></div><div class="intro-note"><span class="note-line"></span><p>Зөвхөн зураг харах биш.<br>Орон зайг нь мэдэр.</p></div></section>
   <section class="explorer" id="explore" aria-label="Барилгын 3D танилцуулга">
     <div class="scene">
       <model-viewer id="building" poster="assets/building-hero.jpg" alt="ОРОН загварын таван давхар орон сууцны барилга" camera-controls touch-action="pan-y" camera-target="16m 9m -4.7m" camera-orbit="35deg 72deg 65m" min-camera-orbit="auto 38deg 32m" max-camera-orbit="auto 88deg 100m" field-of-view="36deg" min-field-of-view="24deg" max-field-of-view="50deg" environment-image="neutral" exposure="1.15" shadow-intensity="0" interaction-prompt="none" reveal="manual" loading="eager">
@@ -33,5 +34,5 @@
   <section class="closing"><span>Дараагийн алхмаа төсөөл.</span><h2>Зураг үзэхээс<br><em>гэрээ сонгох хүртэл.</em></h2><a href="#explore">Барилгаа дахин үзэх ↗</a></section>
   </main>
   <footer><a class="brand" href="#">ОРОН<small>R E S I D E N C E</small></a><div><p>3D орон сууцны борлуулалтын концепц · 2026<br><small>Сургалтын демо. Захиалга, төлбөр хүлээн авахгүй.</small></p><div class="asset-credit">3D: <a href="https://sketchfab.com/3d-models/russian-apartment-building-night-scene-f7fc406a6fa94b76b709a36914df17ca" target="_blank" rel="noreferrer">Russian Apartment Building — Night Scene</a> · <a href="https://sketchfab.com/uliana-" target="_blank" rel="noreferrer">uliana</a> · <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">CC BY 4.0</a><br>Өөрчлөлт: ургамлын геометр, текстурын шахалт, материалын тохируулга, гэрэл ба камер.</div></div><a href="#">Дээшээ ↑</a></footer>
-  <dialog id="planDialog"><button id="closeDialog" class="dialog-close" aria-label="Хаах">×</button><p class="eyebrow">БАЙРНЫ ТАНИЛЦУУЛГА</p><h2 id="dialogTitle"></h2><div id="dialogPlan"></div><div class="dialog-details" id="dialogDetails"></div><p class="section-disclaimer">Зохиомол жишээ план. Архитектурын батлагдсан зураг биш.</p><button id="useApartment" class="primary-button">Энэ байрны төлбөрийг тооцох →</button></dialog>
+  <dialog id="planDialog"><button id="closeDialog" class="dialog-close" aria-label="Хаах">×</button><p class="eyebrow">БАЙРНЫ ТАНИЛЦУУЛГА</p><h2 id="dialogTitle"></h2><div id="dialogPlan"></div><div class="dialog-details" id="dialogDetails"></div><p class="section-disclaimer">Тавилгатай 3D дотор орчин нь өрөөний тоонд тохирсон жишээ загвар. Барилгын бодит дотор план биш.</p><button id="openTour" class="primary-button tour-entry">Байран дотор алхаж үзэх <span>→</span></button><button id="useApartment" class="primary-button">Энэ байрны төлбөрийг тооцох →</button></dialog>
 </body></html>

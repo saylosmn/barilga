@@ -1,0 +1,60 @@
+:root {
+  --bg: #f3f0e8;
+  --green: #223b32;
+  --ink: #182b24;
+  --accent: #a47b50;
+  --line: #d9d9cb;
+}
+body { background: var(--bg); }
+.header { height: 78px; }
+.header-cta { background: var(--green); color: #fff; border: 0; min-height: 44px; }
+.residence-hero {
+  display: grid;
+  grid-template-columns: minmax(0, .83fr) minmax(0, 1.17fr);
+  align-items: stretch;
+  padding: 0;
+  min-height: 0;
+  margin: 28px 0 48px;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #20372f;
+}
+.hero-copy { align-self: center; padding: clamp(28px, 4.3vw, 72px); }
+.residence-hero .eyebrow { color: #dcc9ab; letter-spacing: 1.3px; }
+.residence-hero .eyebrow span { background: none; width: auto; height: auto; margin: 0 5px; }
+.residence-hero h1 { font-size: clamp(38px, 5.1vw, 76px); line-height: 1.06; letter-spacing: -.055em; margin: 20px 0; }
+.residence-hero h1 em { color: #eed3ad; }
+.residence-hero .intro-copy { color: #e1e7df; font-size: 14px; max-width: 32ch; }
+.hero-actions { display: flex; gap: 12px 18px; align-items: center; flex-wrap: wrap; margin-top: 28px; }
+.hero-primary,.hero-secondary { min-height: 44px; display: inline-flex; align-items: center; gap: 12px; font-weight: 700; font-size: 12px; }
+.hero-primary { background: #eed3ad; color: #21362d; padding: 0 16px; border-radius: 5px; }
+.hero-primary:hover { background: #f8e1bd; }
+.hero-secondary { color: #fff; }
+.hero-secondary:hover { text-decoration: underline; }
+.hero-secondary[hidden] { display: none; }
+.hero-image { margin: 0; min-height: 390px; position: relative; isolation: isolate; background: #414c40; }
+.hero-image img { position: absolute; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+.hero-image figcaption { position: absolute; inset: auto 0 0; display: flex; justify-content: space-between; gap: 12px; padding: 34px 22px 17px; background: linear-gradient(transparent,#16251ee6); color: #fff8ec; font-size: 10px; letter-spacing: .08em; }
+.apartments-section { padding-top: 0; }
+.section-heading h2 { font-size: clamp(26px, 3vw, 42px); }
+.listing-filters { padding: 12px; background: #e7e8dd; border-radius: 7px; }
+.listing-filters select { background: #fffdf6; border-color: #c8cec2; }
+.apartment-card { border-radius: 9px; background: #fffdf7; }
+.plan-preview { background: #e6eadf; }
+.card-info { padding: 18px; }
+.card-price { font-size: 23px; font-weight: 700; }
+.card-button { border-radius: 5px; }
+.payment-section { background: #e1e7dc; }
+.calculator { border: 1px solid #d2d8ca; border-radius: 9px; }
+.calculator .terms button { min-height: 44px; font-size: 13px; }
+#explore { margin-bottom: 48px; }
+@media(max-width:740px) {
+  .residence-hero { grid-template-columns: 1fr; margin-top: 16px; margin-bottom: 28px; }
+  .hero-copy { padding: 25px 22px; }
+  .residence-hero h1 { margin: 13px 0; font-size: clamp(36px, 8.8vw, 52px); }
+  .hero-actions { margin-top: 16px; }
+  .hero-image { min-height: 190px; aspect-ratio: 1.85; }
+  .hero-image figcaption { padding: 24px 12px 9px; font-size: 9px; }
+  .card-info { padding: 12px; }
+  .card-price { font-size: 18px; }
+}

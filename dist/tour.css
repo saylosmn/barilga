@@ -28,3 +28,17 @@
  #planDialog{max-height:90dvh;overflow:auto}
  #dialogPlan{height:195px;flex:none}
 }
+/* Carry the building presentation's evening palette into the homepage. */
+:root{--bg:#f2f0e8;--green:#29433a;--accent:#bc9469}
+.intro{margin:24px 0;padding:clamp(30px,6vw,82px) clamp(20px,5vw,68px);min-height:260px;align-items:center;border-radius:8px;background:linear-gradient(90deg,rgba(19,31,27,.94) 0%,rgba(19,31,27,.68) 54%,rgba(19,31,27,.16) 100%),url('assets/building-hero.jpg') center 54%/cover;color:#fff}
+.intro .eyebrow,.intro-copy{color:#f1e6d7}
+.intro h1 em{color:#efd0a6}
+.term-label{display:block}
+#termMonths{width:100%;min-height:44px;border:1px solid #c8d0c6;border-radius:4px;background:#fff;color:#263c36;padding:8px 12px;font-size:16px}
+#termMonths[aria-invalid=true]{border-color:#a14534}
+#savePlan:disabled{opacity:.55;cursor:default}
+#explore[hidden],a[hidden]{display:none}
+@media(max-width:650px){
+ .intro{margin:16px 0;min-height:190px;background-position:60% 53%}
+ .listing-filters .project-filter{grid-column:1/-1}
+}

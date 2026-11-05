@@ -36,7 +36,7 @@
 .term-label{display:block}
 #termMonths{width:100%;min-height:44px;border:1px solid #c8d0c6;border-radius:4px;background:#fff;color:#263c36;padding:8px 12px;font-size:16px}
 #termMonths[aria-invalid=true]{border-color:#a14534}
-#savePlan:disabled{opacity:.55;cursor:default}
+
 #explore[hidden],a[hidden]{display:none}
 @media(max-width:650px){
  .intro{margin:16px 0;min-height:190px;background-position:60% 53%}

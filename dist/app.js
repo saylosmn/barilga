@@ -34,13 +34,12 @@ function calculate(){
   const valid = Number.isInteger(months) && months >= 1 && months <= 360;
   field.setAttribute('aria-invalid', String(!valid));
   $('termHelp').textContent = valid ? '1–360 сар оруулах эсвэл доорх товчоос сонгоно.' : '1–360 хүртэл бүхэл тоо оруулна уу.';
-  $('savePlan').disabled = !valid;
   for (const button of $('terms').children) {
     const selected = valid && Number(button.dataset.months) === months;
     button.classList.toggle('selected', selected);
     button.setAttribute('aria-pressed', String(selected));
   }
-  const pct=Number($('downpayment').value),down=chosen.price*pct/100,monthly=(chosen.price-down)/months;$('calcApartment').textContent=`${chosen.project.name} · ${chosen.id} · ${chosen.rooms} өрөө · ${chosen.area} м²`;$('totalPrice').textContent=money(chosen.price);$('downPercent').textContent=pct+'%';$('downAmount').textContent=money(down);$('monthlyAmount').textContent=valid ? money(monthly) : '—';$('saveStatus').textContent='';return {pct,down,monthly};}
+  const pct=Number($('downpayment').value),down=chosen.price*pct/100,monthly=(chosen.price-down)/months;$('calcApartment').textContent=`${chosen.project.name} · ${chosen.id} · ${chosen.rooms} өрөө · ${chosen.area} м²`;$('totalPrice').textContent=money(chosen.price);$('downPercent').textContent=pct+'%';$('downAmount').textContent=money(down);$('monthlyAmount').textContent=valid ? money(monthly) : '—';}
 $('floorButtons').addEventListener('click',e=>{const b=e.target.closest('[data-floor]');if(!b)return;floor=Number(b.dataset.floor);renderFloors();renderHomes();});
 $('roomFilter').addEventListener('change',renderHomes);
 $('floorFilter').addEventListener('change',e=>{floor=Number(e.target.value);renderFloors();renderHomes();});
@@ -65,7 +64,6 @@ $('projectFilter').addEventListener('change', event => {
   renderHomes();
   calculate();
 });
-$('savePlan').addEventListener('click',()=>{const c=calculate(),text=`ОРОН RESIDENCE — ЖИШЭЭ ТООЦОО\n\nТөсөл: ${chosen.project.name}\nБайр: ${chosen.id}\nДавхар: ${chosen.floor}\nӨрөө: ${chosen.rooms}\nТалбай: ${chosen.area} м²\nНийт үнэ: ${money(chosen.price)}\nУрьдчилгаа: ${c.pct}% — ${money(c.down)}\nХугацаа: ${months} сар\nСарын төлбөр: ${money(c.monthly)}\n\nТуршилтын мэдээлэл. Хүү, шимтгэл ороогүй. Бодит борлуулалт болон зээлийн санал биш.`,url=URL.createObjectURL(new Blob(['\uFEFF'+text],{type:'text/plain;charset=utf-8'})),a=document.createElement('a');a.href=url;a.download=`ORON-${chosen.id}-тооцоо.txt`;a.click();setTimeout(()=>URL.revokeObjectURL(url),2000);$('saveStatus').textContent='Тооцоо файл болж татагдлаа.';});
 function startModel(){loaded=true;$('modelError').hidden=true;$('loadModel').style.pointerEvents='none';$('loadModel').querySelector('strong').textContent='3D модель ачаалж байна…';viewer.src='assets/building.glb';viewer.dismissPoster?.();}
 $('loadModel').addEventListener('click',startModel);$('retryModel').addEventListener('click',()=>{viewer.removeAttribute('src');setTimeout(startModel,50);});
 viewer.addEventListener('load',()=>{viewer.dismissPoster();viewer.cameraTarget='16m 9m -4.7m';viewer.cameraOrbit='35deg 72deg 52m';viewer.jumpCameraToGoal();$('sceneLabel').textContent='ИНТЕРАКТИВ 3D ОРЧИН';$('floorSpot').style.display='block';$('loadModel').style.display='none';});

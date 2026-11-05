@@ -121,3 +121,31 @@ body { background: var(--bg); }
 #planDialog .tour-entry { color:#e9d3b3; border-color:#6d806e; }
 #planDialog .tour-entry:hover { background:#324638; }
 #planDialog .primary-button:not(.tour-entry) { background:#dfbd8c; color:#14231a; }
+.catalog-tools,.catalog-actions {display:flex;flex-wrap:wrap;align-items:end;gap:10px;margin:12px 0}
+.catalog-tools label {display:grid;gap:6px;font-size:13px;color:#e6d6bd}
+.catalog-tools input[type=number] {width:155px;min-height:44px;background:#102019;border:1px solid #526252;border-radius:5px;color:#fff;padding:8px 10px;font-size:16px}
+.catalog-tools .stock-filter {display:flex;align-items:center;min-height:44px}
+.catalog-tools button,.catalog-actions button,.compare-toggle {padding:9px 12px;min-height:44px;border:1px solid #697d69;border-radius:5px;background:#253d31;color:#f3ede0}
+.catalog-actions button:disabled {opacity:.55;cursor:default}
+.compare-toggle {width:100%;margin-top:7px}
+.compare-toggle[aria-pressed=true] {background:#dfbd8c;color:#182820}
+.catalog-dialog {width:min(780px,94vw);max-height:90dvh;background:#192b23;color:#f3ede0;border-color:#526252}
+.compare-grid,.unit-map {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.compare-grid article {background:#253c31;border-radius:6px;padding:12px;min-width:0}
+.compare-grid svg {width:100%;height:130px;background:#dce2d3}
+.compare-grid dl {margin:8px 0;font-size:13px}
+.compare-grid dd {margin:0 0 8px;color:#f2d1a2;font-weight:700}
+.unit-map button {background:#315442;color:#fff;border:1px solid #74937c;padding:16px;border-radius:5px}
+.unit-map button.reserved {background:#624e37}
+.unit-map small {display:block;margin-top:5px}
+#copyStatus {overflow-wrap:anywhere}
+@media(max-width:650px){.catalog-tools input[type=number]{width:130px}.catalog-dialog{padding:20px 12px}.compare-grid article{padding:8px}}
+.catalog-form {display:grid;gap:12px}
+.catalog-form label {display:grid;gap:5px}
+.catalog-form input:not([type=checkbox]),.catalog-form select {width:100%;min-height:44px;background:#102019;border:1px solid #526252;border-radius:5px;color:#fff;padding:8px;font-size:16px}
+.catalog-form button:disabled,#viewingButton:disabled {opacity:.55}
+.panorama-viewport {position:relative;height:clamp(230px,50vh,450px);overflow:hidden;border-radius:7px;background:#0e1913}
+.panorama-viewport canvas {width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.panorama-viewport p:not(:empty) {position:absolute;left:12px;bottom:8px;background:#14251d;padding:8px}
+.catalog-actions button[aria-pressed=true] {background:#dfbd8c;color:#182820}
+#panoramaButton[hidden] {display:none}

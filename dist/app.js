@@ -17,11 +17,13 @@ const homes = projects.flatMap(project => Array.from({length:5}, (_,i) =>
     price:Math.round(type.area*(project.rate+i*.05)*1e6), reserved:(i+j)%5===3,
   }))
 ).flat());
-$('projectFilter').innerHTML = ['Баригдаж буй','Ашиглалтад орсон'].map(stage =>
-  `<optgroup label="${stage} · жишээ">${projects.filter(p => p.stage === stage)
-    .map(p => `<option value="${p.id}">${p.name}</option>`).join('')}</optgroup>`
-).join('');
-$('projectFilter').value = projectId;
+$('projectChoices').innerHTML = projects.map((project, index) => `
+  <button type="button" class="project-choice" data-project="${project.id}" aria-pressed="${project.id === projectId}">
+    <span class="project-index">0${index + 1}</span>
+    <strong>${project.name}</strong>
+    <small>${project.stage} · жишээ</small>
+  </button>
+`).join('');
 chosen = homes.find(h => h.id === 'A-302');
 const money=n=>new Intl.NumberFormat('mn-MN',{maximumFractionDigits:0}).format(Math.round(n))+' ₮';
 const millions=n=>(n/1e6).toFixed(2).replace(/0+$/,'').replace(/\.$/,'');
@@ -54,8 +56,13 @@ $('terms').addEventListener('click', event => {
   $('termMonths').value = button.dataset.months;
   calculate();
 });
-$('projectFilter').addEventListener('change', event => {
-  projectId = event.target.value;
+$('projectChoices').addEventListener('click', event => {
+  const selected = event.target.closest('[data-project]');
+  if (!selected || selected.dataset.project === projectId) return;
+  projectId = selected.dataset.project;
+  for (const button of $('projectChoices').children) {
+    button.setAttribute('aria-pressed', String(button === selected));
+  }
   if (projectId !== 'A') viewer.autoRotate = false;
   $('explore').hidden = projectId !== 'A';
   for (const link of document.querySelectorAll('a[href="#explore"]')) link.hidden = projectId !== 'A';

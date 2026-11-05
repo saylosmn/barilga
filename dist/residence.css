@@ -89,3 +89,35 @@ body { background: var(--bg); }
   .project-choices { grid-template-columns:repeat(2,minmax(0,1fr)); }
   .project-choice { padding:11px; }
 }
+:root { --bg:#0f1916; --ink:#f3ede0; --accent:#d8b482; --line:#38473c; }
+.header nav,.header nav a.active { color:#e6dbca; }
+.header-cta,.hero-primary { background:#dfbd8c; color:#182820; }
+#apartments .section-heading { margin-bottom:16px; }
+#apartments .eyebrow,.payment-section .eyebrow { color:#dec39b; }
+.listing-filters { display:grid; grid-template-columns:2fr 1fr 1fr; gap:12px; padding:14px; background:#1a2b23; border:1px solid #39483b; }
+.listing-filters label { color:#e6d6bd; }
+.listing-filters select { background:#102019; border-color:#526252; color:#f7efdf; width:100%; font-size:16px; }
+#listingStatus { color:#c5cdbd; margin:13px 0; }
+.apartment-card { background:#1c2c25; }
+.plan-preview { background:#dce2d3; height:165px; }
+.card-spec,.card-top span,.card-price small { color:#d0d8c7; }
+.card-price { color:#f2d1a2; }
+.card-button { background:#dfbd8c; color:#14231a; }
+.payment-section { background:#22382d; }
+.calculator,#planDialog { background:#192b23; border-color:#465647; }
+.calc-total span,.calc-results small,.calc-note,.section-disclaimer,.payment-intro>p:not(.eyebrow),.range-labels { color:#c8d2c0; }
+.calc-results>div:last-child strong { color:#f0cd99; }
+#termMonths { background:#102019; color:#fff; border-color:#687d69; }
+.floor-panel { background:#1a2b23; }
+.floor-btn { background:#2b4034; }
+.floor-btn.selected { background:#dfbd8c; color:#17261d; }
+.floor-btn.selected span { color:#293e31; }
+@media(max-width:650px) {
+  .listing-filters { grid-template-columns:1fr 1fr; }
+  .listing-filters .project-filter { grid-column:1/-1; }
+  .plan-preview { height:125px; }
+}
+.hero-image img { object-position: center 63%; }
+#planDialog .tour-entry { color:#e9d3b3; border-color:#6d806e; }
+#planDialog .tour-entry:hover { background:#324638; }
+#planDialog .primary-button:not(.tour-entry) { background:#dfbd8c; color:#14231a; }
